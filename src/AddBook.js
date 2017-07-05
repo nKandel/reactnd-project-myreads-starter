@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import toastr from 'toastr';
 
 import * as BooksAPI from './BooksAPI';
 import BookTemplate from './BookTemplate';
@@ -33,8 +34,10 @@ class AddBook extends Component {
 
     addBook = (book, shelf) => {
         this.props.onChangeState(book, shelf);
-        this.setState({books: this.state.books.filter((bok)=> bok.id!==book.id)});
+        this.setState({books: this.state.books.filter((bok) => bok.id !== book.id)});
+        toastr.success("Book added to library")
     };
+
     render() {
         const {books, query} = this.state;
 

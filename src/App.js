@@ -1,12 +1,14 @@
-import React from 'react'
-import {Route} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route, BrowserRouter} from 'react-router-dom';
 
-import AddBook from './AddBook'
-import * as BookAPI from './BooksAPI'
-import ListBooks from './ListBooks'
-import './App.css'
+import AddBook from './AddBook';
+import * as BookAPI from './BooksAPI';
+import ListBooks from './ListBooks';
+import './App.css';
+import toastr from 'toastr';
 
-class App extends React.Component {
+
+class App extends Component {
     state = {
         books: []
     };
@@ -22,6 +24,9 @@ class App extends React.Component {
 
     onChangeState = (book, shelf) => {
         BookAPI.update(book, shelf).then(() => {
+            if (book.shelf) {
+                toastr.success("Updated books status")
+            }
             const book_updated = {...book, shelf: shelf};
             const books = [...this.state.books.filter((bk) => bk.id !== book.id), book_updated];
             this.setState({books});
@@ -31,6 +36,7 @@ class App extends React.Component {
 
     render() {
         return (
+            <BrowserRouter>
                 <div className="app">
                     <Route exact path="/" render={() => (
                         <ListBooks
@@ -42,6 +48,7 @@ class App extends React.Component {
                             onChangeState={this.onChangeState}/>
                     )}/>
                 </div>
+            </BrowserRouter>
         )
     }
 }

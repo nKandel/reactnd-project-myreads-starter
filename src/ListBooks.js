@@ -12,7 +12,7 @@ class ListBooks extends Component {
         onChangeState: PropTypes.func.isRequired
     };
 
-    style = (books, title, shelf) => {
+    shelf_block = (books, title, shelf) => {
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{title}</h2>
@@ -39,9 +39,9 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        {this.style(books, `Currently Reding`, `currentlyReading`)}
-                        {this.style(books, `Want to Read`, `wantToRead`)}
-                        {this.style(books, `Read`, `read`)}
+                        {this.shelf_block(books, `Currently Reding`, `currentlyReading`)}
+                        {this.shelf_block(books, `Want to Read`, `wantToRead`)}
+                        {this.shelf_block(books, `Read`, `read`)}
                     </div>
                 </div>
                 <div className="open-search">
